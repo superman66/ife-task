@@ -22,22 +22,26 @@ function addAqiData() {
     var error_city = document.getElementById('error-city');
     var error_value = document.getElementById('error-value');
     if (city == '') {
-        error_city.innerText = '城市不能为空'
+        error_city.innerText = '城市不能为空';
+        return;
     }
     else if (new RegExp("^[\u4e00-\u9fa5_a-zA-Z]+$").test(city)) {
         city = city.trim();
     }
     else {
         error_city.innerText = '请输入中英文字符';
+        return;
     }
     if (value == '') {
         error_value.innerText = '空气质量指数不能为空';
+        return;
     }
-    else if (new RegExp("^[1-9]\d*$").test(value)) {
+    else if (new RegExp("^[1-9]{1,4}\d*$").test(value)) {
         value = value.trim();
     }
     else {
         error_value.innerText = '请输入整数';
+        return;
     }
     aqiData[city] = value;
     console.log(aqiData);
@@ -47,7 +51,13 @@ function addAqiData() {
  * 渲染aqi-table表格
  */
 function renderAqiList() {
-
+    var table = document.querySelector('#aqi-table');
+    table.innerHTML = '<th><td>城市</td><td>空气质量</td><td><button>操作</button></td></th>';
+    aqiData.forEach(function (index, element) {
+        if (index === aqiData.length - 1) {
+            table.innerHTML = '<tr><td>' + element[0] + '</td><td>' + element[1] + '</td><td><button>删除</button></td></tr>'
+        }
+    })
 }
 
 /**
@@ -79,5 +89,6 @@ function init() {
 
 init();
 window.onload = function () {
-    addAqiData();
-}
+    //document.querySelector('#add-btn').addEventListener('click', addAqiData, false);
+    //addAqiData();
+};
