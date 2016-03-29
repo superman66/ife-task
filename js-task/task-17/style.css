@@ -1,0 +1,25 @@
+.chart-container{
+    width: 100%;
+    background: #eee;
+    position: relative;
+    min-height: 500px;
+}
+.aqi-chart-wrap{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+}
+.line{
+    width: 10px;
+    height: 0;
+    background: darkred;
+    display: inline-block;
+    transition: height 2s;
+    -moz-transition: height 2s;	/* Firefox 4 */
+    -webkit-transition: height 2s;	/* Safari 和 Chrome */
+    -o-transition: height 2s;
+}
+.title{
+    text-align: center;
+}
