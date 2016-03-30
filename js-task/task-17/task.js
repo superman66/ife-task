@@ -128,6 +128,7 @@
         function clearChartData() {
             chartData = {};
         }
+
         /**
          * 清除图表
          */
@@ -242,7 +243,16 @@
                 }
                 //选择周视图
                 if (pageState.nowGraTime == 'week') {
-
+                    var tempWeek = {};
+                    tempWeek[pageState.nowSelectCity] = {};
+                    //定义当前的周次，默认为1
+                    var currentWeek = 1;
+                    for (var date in aqiSourceData[pageState.nowSelectCity]) {
+                        //计算每周的平均值，并存入tempWeek中
+                        
+                        tempWeek[pageState.nowSelectCity][DateUtil.getYearWeek(date)] = aqiSourceData[pageState.nowSelectCity][date];
+                    }
+                    console.log(tempWeek);
                 }
                 //选择月视图
                 if (pageState.nowGraTime == 'month') {
@@ -258,7 +268,7 @@
          */
         function weekSourceData(data) {
             var chartDataTemp = {};
-            for(var date in data){
+            for (var date in data) {
 
             }
         }
