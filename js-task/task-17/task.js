@@ -91,7 +91,9 @@
                     d = Math.round((d1 - d2) / 86400000);
                 return Math.ceil((d + ((d2.getDay() + 1) - 1)) / 7);
             },
+            getDay: function (date) {
 
+            },
             //根据日期获得当前月份
             getMonth: function (date) {
                 date = date.split('-');
@@ -177,10 +179,8 @@
                 // 设置对应数据
                 pageState.nowGraTime = value;
                 console.log(pageState);
-                //重新初始化图标数据
-                initAqiChartData();
                 // 调用图表渲染函数
-                // renderChart();
+                renderChart();
             }
 
         }
@@ -195,10 +195,8 @@
                 // 设置对应数据
                 pageState.nowSelectCity = city_select.value;
                 console.log(pageState);
-                //重新初始化图标数据
-                initAqiChartData();
                 // 调用图表渲染函数
-                // renderChart();
+                renderChart();
             }
         }
 
@@ -231,33 +229,20 @@
          * 初始化图表需要的数据格式
          */
         function initAqiChartData() {
-            //先清除ChartData
-            clearChartData();
-            // 将原始的源数据处理成图表需要的数据格式
-            // 处理好的数据存到 chartData 中
-            if (pageState.nowSelectCity != -1) {
-                //选择日视图
-                if (pageState.nowGraTime == 'day') {
-                    chartData[pageState.nowSelectCity] = aqiSourceData[pageState.nowSelectCity];
-                    console.log(chartData);
-                }
-                //选择周视图
-                if (pageState.nowGraTime == 'week') {
-                    var tempWeek = {};
-                    tempWeek[pageState.nowSelectCity] = {};
-                    //定义当前的周次，默认为1
-                    var currentWeek = 1;
-                    for (var date in aqiSourceData[pageState.nowSelectCity]) {
-                        //计算每周的平均值，并存入tempWeek中
-                        
-                        tempWeek[pageState.nowSelectCity][DateUtil.getYearWeek(date)] = aqiSourceData[pageState.nowSelectCity][date];
-                    }
-                    console.log(tempWeek);
-                }
-                //选择月视图
-                if (pageState.nowGraTime == 'month') {
+            var weekData = {};
+            var monthData = {};
+            //初始化日视图数据格式
+            chartData[pageState.nowGraTime] = aqiSourceData;
+
+            // 初始化周视图数据格式
+            for (var city in aqiSourceData) {
+                for (var date in aqiSourceData[city]) {
+                    var currentWeek = DateUtil.getYearWeek(date);
+                    //通过判断当前时期是否为周日来作为条件
+                    console.log('第'+currentWeek+'周 :'+date);
                 }
             }
+
 
             renderChart();
         }
