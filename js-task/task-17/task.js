@@ -143,7 +143,7 @@
          */
         function renderChart() {
             //渲染之前先清除图表
-            clearChart();
+          //  clearChart();
             for (var data in chartData[pageState.nowSelectCity]) {
                 var line = document.createElement('div');
                 line.className = 'line';

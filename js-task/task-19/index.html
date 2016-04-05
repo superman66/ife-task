@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .array {
+            margin: 25px 0;
+            width: 100%;
+            position: absolute;
+            text-align: center;
+        }
+
+        .array .item {
+            display: inline-block;
+            background: orangered;
+            color: #fff;
+            margin: 0 2px;
+            cursor: pointer;
+            padding: 5px;
+            width: 1%;
+            height: 0;
+            vertical-align: bottom;
+            transition: height 1s;
+            -moz-transition: height 1s;	/* Firefox 4 */
+            -webkit-transition: height 1s;	/* Safari 和 Chrome */
+            -o-transition: height 1s;
+        }
+        .info{
+            color: red;
+        }
+        .sub-item{
+
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <input type="text" id="num">
+    <span class="info">*请输入10-100的数字</span><br>
+    <input type="button" value="左侧入" id="left-in"/>
+    <input type="button" value="右侧入" id="right-in"/>
+    <input type="button" value="左侧出" id="left-out"/>
+    <input type="button" value="右侧出" id="right-out"/>
+    <br>
+    <input type="button" value="从小到大排序" id="orderByEsc"/>
+    <input type="button" value="从大到小排序" id="orderByDEsc"/>
+    <div class="array" id="array">
+    </div>
+</div>
+<script src="task.js"></script>
+</body>
+</html>
