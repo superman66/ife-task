@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <div class="page-header">
+        <h1>购物车</h1>
+        <h3><a href="#/index">返回首页</a></h3>
+        <p>商品总数：{{cartList.length}}</p>
+    </div>
+
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="product in cartList">
+            <div class="media">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object" ng-src="{{product.imgUrl}}" alt="..." style="width: 64px">
+                    </a>
+                </div>
+                <div class="media-body" style="width: 89%">
+                    <h4 class="media-heading">{{product.product_name}}</h4>
+                    <p>库存：{{product.num}}</p>
+                </div>
+                <div class="media-right">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></div>
+                                <input type="text" class="form-control" id="exampleInputAmount" placeholder="2">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <div class="col-xs-offset-10">
+        总计：999
+        <a class="btn btn-primary" role="button" ng-click="buy()">结算</a>
+    </div>
+</div>
