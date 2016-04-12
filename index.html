@@ -5,8 +5,24 @@
     <title>Creating Project Pages manually
     </title>
 </head>
-<body>
-<h1>Creating Project Pages manually
-</h1>
+<body ng-app="app" ng-controller="MainController">
+<button ng-click="toggle()">显示\隐藏</button>
+<div ng-if="show">
+    <h1>
+        {{title}}
+    </h1>
+</div>
+<script src="angular.min.js"></script>
+<script>
+    angular.module('app', [])
+            .controller('MainController', ['$scope', function ($scope) {
+                $scope.show = false;
+                $scope.title = 'Creating Project Pages manually';
+                $scope.toggle = function () {
+                    $scope.show = !$scope.show;
+                }
+            }])
+    ;
+</script>
 </body>
 </html>
