@@ -11,9 +11,11 @@
         var leftOut = document.querySelector('#left-out');
         var rightOut = document.querySelector('#right-out');
         var displayArray = document.querySelector('#array');
+        var items = document.querySelector('.item');
         var orderByEsc = document.querySelector('#orderByEsc');
         var orderByDesc = document.querySelector('#orderByDEsc');
         var DEFAULT_SIZE = 60; //定义数组的长度
+        var state = [];
         var EventUtil = {
             addEvent: function (element, type, handler) {
                 if (element.addEventListener) {
@@ -44,6 +46,37 @@
                         handler.call(target, event);
                     }
                 })
+            }
+        };
+
+        /**
+         * 数组排序
+         * @param arr
+         */
+        var sort = function (arr) {
+            for (var i = 0; i < arr.length; i++) {
+                for (var j = 0; j < arr.length - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        arr[j] = arr[j] + arr[j + 1];
+                        arr[j + 1] = arr[j] - arr[j + 1];
+                        arr[j] = arr[j] - arr[j + 1];
+                        //将每次的状态放入state数组
+                        state.push(JSON.parse(JSON.stringify(arr)));
+                    }
+                }
+            }
+        };
+
+
+        /**
+         * 绘制数组
+         */
+        var draw = function () {
+            var bar, s;
+            s = state.shift() || [];
+            for(bar in items){
+                items[bar].style.height = 50 * s[bar];
+                items[bar].style.left = 50 * bar;
             }
         };
 
@@ -146,27 +179,9 @@
          * 从小到大排序
          */
         function orderByEscArray() {
-            var len = numArray.length,     // 数组的长度
-                value,                      // 当前比较的值
-                i,                          // 未排序部分的当前位置
-                j;                          // 已排序部分的当前位置
-
-            for (i = 0; i < len; i++) {
-                // 储存当前位置的值
-                value = numArray[i];
-                /*
-                 * 当已排序部分的当前元素大于value，
-                 * 就将当前元素向后移一位，再将前一位与value比较
-                 */
-
-                for (j = i - 1; j > -1 && numArray[j] > value; j--) {
-                    numArray[j + 1] = numArray[j];
-                }
-
-                numArray[j + 1] = value;
-            }
-            console.log('after sort:' + numArray);
-            renderArray();
+            console.log('array:' + numArray);
+            sort(numArray);
+            setInterval(draw, 500);
         }
 
         function orderByDescArray() {
